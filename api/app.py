@@ -6,13 +6,14 @@ from re import match
 from glob import glob
 from os import chdir
 import os
+
 app = Flask(__name__)
 app.static_folder = 'static'
 @app.route('/')
 def index():
     return render_template('index.html')
 @app.route('/sobre')
-def index():
+def sobre():
     return render_template('sobre.html')
 
 if __name__ == '__main__':
