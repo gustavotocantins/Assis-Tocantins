@@ -12,9 +12,9 @@ app.static_folder = 'static'
 @app.route('/')
 def index():
     return render_template('index.html')
-@app.route('/sobre')
+@app.route('/projetos')
 def sobre():
-    return render_template('sobre.html')
+    return render_template('projetos.html')
 
 @app.route('/whatsapp')
 def whatsapp():
