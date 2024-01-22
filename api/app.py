@@ -20,5 +20,9 @@ def sobre():
 def whatsapp():
     return redirect('https://chat.whatsapp.com/Ghx4tk2ApIw9A9WNTklIYF')
 
+@app.route('/blog/pre-candidato-a-vereador-castanhal-2024')
+def blog_post_pre_candidato():
+    return render_template('blog-post-pré-candidato.html')
+
 if __name__ == '__main__':
     app.run()
