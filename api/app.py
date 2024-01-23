@@ -27,5 +27,9 @@ def blog_post_pre_candidato():
 @app.route('/blog/castanhal-mil-grau')
 def blog_milgrau():
     return render_template('blog-castanhalmilgrau.html')
+
+@app.route('/blog/castanhal-online')
+def blog_castanhalonline():
+    return render_template('blog-castanhalonline.html')
 if __name__ == '__main__':
     app.run()
