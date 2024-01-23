@@ -24,5 +24,8 @@ def whatsapp():
 def blog_post_pre_candidato():
     return render_template('blog-post-pré-candidato.html')
 
+@app.route('/blog/castanhal-mil-grau')
+def blog_milgrau():
+    return render_template('blog-castanhalmilgrau.html')
 if __name__ == '__main__':
     app.run()
