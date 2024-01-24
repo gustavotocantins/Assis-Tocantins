@@ -18,7 +18,7 @@ def sobre():
 
 @app.route('/whatsapp')
 def whatsapp():
-    return redirect('https://chat.whatsapp.com/Ghx4tk2ApIw9A9WNTklIYF')
+    return render_template('whatsapp.html')
 
 @app.route('/blog/pre-candidato-a-vereador-castanhal-2024')
 def blog_post_pre_candidato():
@@ -31,5 +31,10 @@ def blog_milgrau():
 @app.route('/blog/castanhal-online')
 def blog_castanhalonline():
     return render_template('blog-castanhalonline.html')
+
+@app.route('/instagram')
+def instagram():
+    return render_template('instagram.html')
+
 if __name__ == '__main__':
     app.run()
