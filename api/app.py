@@ -32,6 +32,14 @@ def blog_milgrau():
 def blog_castanhalonline():
     return render_template('blog-castanhalonline.html')
 
+@app.route('/ZapPessoal')
+def zappessoal():
+    return render_template('zappessoal.html')
+
+@app.route('/facebook')
+def facebook():
+    return render_template('facebook.html')
+
 @app.route('/instagram')
 def instagram():
     return render_template('instagram.html')
