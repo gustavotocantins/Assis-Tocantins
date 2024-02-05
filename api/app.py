@@ -32,6 +32,10 @@ def blog_post_pre_candidato():
 def blog_milgrau():
     return render_template('blog-castanhalmilgrau.html')
 
+@app.route('/blog/vagas-de-emprego-whatsapp-castanhal')
+def vagasdeemprego():
+    return render_template('blog-grupodeemprego.html')
+
 @app.route('/blog/castanhal-online')
 def blog_castanhalonline():
     return render_template('blog-castanhalonline.html')
