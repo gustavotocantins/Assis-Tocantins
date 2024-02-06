@@ -24,6 +24,10 @@ def whatsapp():
 def ZAP():
     return render_template('whatsapp.html')
 
+@app.route('/participar')
+def participar():
+    return render_template('participar.html')
+
 @app.route('/blog/pre-candidato-a-vereador-castanhal-2024')
 def blog_post_pre_candidato():
     return render_template('blog-post-pré-candidato.html')
