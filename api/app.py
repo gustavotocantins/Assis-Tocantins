@@ -6,6 +6,7 @@ from re import match
 from glob import glob
 from os import chdir
 import os
+import json
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -63,6 +64,41 @@ def instagram():
 @app.route('/convite/<identificacao>')
 def convite(identificacao):
     return redirect(f"https://api.whatsapp.com/send?phone=559181539406&text=%F0%9F%8E%81%20Quero%20participar%20do%20Doa%C3%A7%C3%A3o%20Premiada%20e%20concorrer%20a%20pr%C3%AAmios%20todo%20m%C3%AAs!%20convite:{identificacao}")
+
+
+@app.route('/<nome>/<whatsapp>/<local>/<lider>')
+def cadastrar(nome,whatsapp,local,lider):
+    nome = nome.replace('%20', ' ')
+    lider = lider.replace('%20', ' ')
+    local = local.replace('%20', ' ')
+    import firebase_admin
+    from firebase_admin import credentials
+    from firebase_admin import db
+    try:
+        firebase_admin.delete_app(firebase_admin.get_app())
+    except:
+        pass
+
+    firebase_credentials = os.getenv('FIREBASE_CREDENTIALS')
+
+    cred_dict = json.loads(firebase_credentials)
+    cred_obj = firebase_admin.credentials.Certificate(cred_dict)
+
+    default_app = firebase_admin.initialize_app(cred_obj, {
+        'databaseURL':'https://assistocantinsreserva-default-rtdb.firebaseio.com/'
+        })      
+    
+    ref_usuarios = db.reference(f'/')
+
+    novo_usuario =[nome,whatsapp,local]
+
+    ref_usuarios.child(lider).set({
+    novo_usuario[1]: f'["{novo_usuario[0]}","{novo_usuario[2]}","{novo_usuario[1]}"]'
+})
+
+    return f"O {nome} foi adicionado a base de dados!"
+
+
 
 
 if __name__ == '__main__':
