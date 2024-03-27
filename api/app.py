@@ -92,7 +92,7 @@ def cadastrar(lider,whatsapp,dados):
 
     novo_usuario = dados
 
-    ref_usuarios.child(lider).set({
+    ref_usuarios.child(lider).update({
     whatsapp: dados
 })
 
