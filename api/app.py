@@ -65,11 +65,10 @@ def instagram():
 def convite(identificacao):
     return redirect(f"https://api.whatsapp.com/send?phone=559181539406&text=%F0%9F%8E%81%20Quero%20participar%20do%20Doa%C3%A7%C3%A3o%20Premiada%20e%20concorrer%20a%20pr%C3%AAmios%20todo%20m%C3%AAs!%20convite:{identificacao}")
 
-@app.route('/cadastrar/<nome>/<lider>/<whatsapp>/<dados>/')
-def cadastrar(nome,whatsapp,dados,lider):
-    nome = nome.replace('%20', ' ')
+@app.route('/cadastrar/<lider>/<whatsapp>/<dados>/')
+def cadastrar(lider,whatsapp,dados):
     lider = lider.replace('%20', ' ')
-    local = dados.replace('%20', ' ')
+    dados = dados.replace('%20', ' ')
     import firebase_admin
     from firebase_admin import credentials
     from firebase_admin import db
@@ -89,13 +88,13 @@ def cadastrar(nome,whatsapp,dados,lider):
     
     ref_usuarios = db.reference(f'/')
 
-    novo_usuario =[nome,whatsapp,local]
+    novo_usuario = dados
 
     ref_usuarios.child(lider).set({
-    novo_usuario[1]: f'["{novo_usuario[0]}","{novo_usuario[2]}","{novo_usuario[1]}"]'
+    novo_usuario[1]: dados
 })
 
-    return f"O {nome} foi adicionado a base de dados!"
+    return f"O {dados} foi adicionado a base de dados!"
 
 if __name__ == '__main__':
     app.run()
