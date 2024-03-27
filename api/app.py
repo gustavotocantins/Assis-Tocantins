@@ -68,6 +68,7 @@ def convite(identificacao):
 @app.route('/cadastrar/<lider>/<whatsapp>/<dados>/')
 def cadastrar(lider,whatsapp,dados):
     lider = lider.replace('%20', ' ')
+    dados = str(dados)
     dados = dados.replace('%20', ' ')
     import firebase_admin
     from firebase_admin import credentials
