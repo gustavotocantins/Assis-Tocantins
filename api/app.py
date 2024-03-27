@@ -69,7 +69,7 @@ def convite(identificacao):
 def cadastrar(nome,whatsapp,dados,lider):
     nome = nome.replace('%20', ' ')
     lider = lider.replace('%20', ' ')
-    dados = dados.replace('%20', ' ')
+    local = dados.replace('%20', ' ')
     import firebase_admin
     from firebase_admin import credentials
     from firebase_admin import db
@@ -89,7 +89,7 @@ def cadastrar(nome,whatsapp,dados,lider):
     
     ref_usuarios = db.reference(f'/')
 
-    novo_usuario =[nome,whatsapp,dados]
+    novo_usuario =[nome,whatsapp,local]
 
     ref_usuarios.child(lider).set({
     novo_usuario[1]: f'["{novo_usuario[0]}","{novo_usuario[2]}","{novo_usuario[1]}"]'
