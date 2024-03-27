@@ -93,7 +93,7 @@ def cadastrar(lider,whatsapp,dados):
     novo_usuario = dados
 
     ref_usuarios.child(lider).set({
-    novo_usuario[1]: dados
+    whatsapp: dados
 })
 
     return f"O {dados} foi adicionado a base de dados!"
