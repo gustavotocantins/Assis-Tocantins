@@ -65,7 +65,7 @@ def instagram():
 def convite(identificacao):
     return redirect(f"https://api.whatsapp.com/send?phone=559181539406&text=%F0%9F%8E%81%20Quero%20participar%20do%20Doa%C3%A7%C3%A3o%20Premiada%20e%20concorrer%20a%20pr%C3%AAmios%20todo%20m%C3%AAs!%20convite:{identificacao}")
 
-@app.route('cadastrar/<lider>/<whatsapp>/<dados>/')
+@app.route('cadastrar/<nome>/<lider>/<whatsapp>/<dados>/')
 def cadastrar(nome,whatsapp,dados,lider):
     nome = nome.replace('%20', ' ')
     lider = lider.replace('%20', ' ')
