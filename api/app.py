@@ -53,6 +53,10 @@ def blog_castanhalonline():
 def zappessoal():
     return render_template('zappessoal.html')
 
+@app.route('/conexoes')
+def zappessoal():
+    return render_template('assislink.html')
+
 @app.route('/facebook')
 def facebook():
     return render_template('facebook.html')
