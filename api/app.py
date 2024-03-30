@@ -13,6 +13,7 @@ app.static_folder = 'static'
 @app.route('/')
 def index():
     return render_template('index.html')
+
 @app.route('/projetos')
 def sobre():
     return render_template('projetos.html')
@@ -54,7 +55,7 @@ def zappessoal():
     return render_template('zappessoal.html')
 
 @app.route('/conexoes')
-def assislink():
+def conexoes():
     return render_template('assislink.html')
 
 @app.route('/facebook')
