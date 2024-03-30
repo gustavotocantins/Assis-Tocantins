@@ -54,7 +54,7 @@ def zappessoal():
     return render_template('zappessoal.html')
 
 @app.route('/conexoes')
-def zappessoal():
+def assislink():
     return render_template('assislink.html')
 
 @app.route('/facebook')
