@@ -52,6 +52,7 @@ def blog_castanhalonline():
 
 @app.route('/ZapPessoal')
 def zappessoal():
+    print("teste")
     return render_template('zappessoal.html')
 
 @app.route('/conexoes')
