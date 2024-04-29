@@ -1,6 +1,4 @@
 from flask import Flask, render_template, url_for, request, redirect
-from PIL import Image
-import numpy as np
 from pickle import load
 from re import match
 from glob import glob
