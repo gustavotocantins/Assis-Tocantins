@@ -46,6 +46,11 @@ def blog_milgrau():
 def vagasdeemprego():
     return render_template('blog-grupodeemprego.html')
 
+@app.route('/blog/grupo-whatsapp-castanhal')
+def gruposzap():
+    return render_template('blog-grupowhatsapp.html')
+
+
 @app.route('/blog/castanhal-online')
 def blog_castanhalonline():
     return render_template('blog-castanhalonline.html')
