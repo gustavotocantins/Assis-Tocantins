@@ -38,10 +38,6 @@ def transicao():
 def blog_post_pre_candidato():
     return render_template('blog-post-pré-candidato.html')
 
-@app.route('/blog/castanhal-mil-grau')
-def blog_milgrau():
-    return render_template('blog-castanhalmilgrau.html')
-
 @app.route('/blog/vagas-de-emprego-whatsapp-castanhal')
 def vagasdeemprego():
     return render_template('blog-grupodeemprego.html')
