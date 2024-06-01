@@ -49,6 +49,10 @@ def gruposzap():
 def blog_castanhalonline():
     return render_template('blog-castanhalonline.html')
 
+@app.route('/blog/castanhal-mil-grau')
+def blog_castanhalmilgrau():
+    return render_template('blog-castanhalmilgrau.html')
+
 @app.route('/ZapPessoal')
 def zappessoal():
     print("teste")
