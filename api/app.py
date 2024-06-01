@@ -54,7 +54,7 @@ def zappessoal():
     print("teste")
     return render_template('zappessoal.html')
 
-@app.route('/conexoes')
+@app.route('/mobilizar')
 def conexoes():
     return render_template('assislink.html')
 
