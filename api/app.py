@@ -20,6 +20,10 @@ def sobre():
 def whatsapp():
     return render_template('whatsapp.html')
 
+@app.route('/GolSolidario')
+def golsolidario():
+    return render_template('GolSolidario.html')
+
 @app.route('/ZAP')
 def ZAP():
     return render_template('whatsapp.html')
