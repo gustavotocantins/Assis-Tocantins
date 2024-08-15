@@ -31,9 +31,15 @@ def golsolidario():
 @app.route('/AdesivoDigital', methods=['GET', 'POST'])
 def adesivodigital():
     def add_watermark(image, watermark_path):
-        watermark = Image.open(watermark_path).convert("RGBA")
-        image.paste(watermark, (0, 0), watermark)
+        base_path = os.path.dirname(__file__)
+        watermark_full_path = os.path.join(base_path, 'static', 'watermark.png')
+        try:
+            watermark = Image.open(watermark_full_path).convert("RGBA")
+            image.paste(watermark, (0, 0), watermark)
+        except FileNotFoundError:
+            raise Exception(f"Watermark file not found: {watermark_full_path}")
         return image
+    
     if request.method == 'POST':
         if 'file' not in request.files:
             return 'No file part', 400
