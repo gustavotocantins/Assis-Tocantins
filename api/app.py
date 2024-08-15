@@ -1,10 +1,12 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect,send_file
 from pickle import load
 from re import match
 from glob import glob
 from os import chdir
 import os
 import json
+from PIL import Image, ImageOps
+import io
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -23,6 +25,36 @@ def whatsapp():
 @app.route('/GolSolidario')
 def golsolidario():
     return render_template('GolSolidario.html')
+
+def add_watermark(image, watermark_path):
+    watermark = Image.open(watermark_path).convert("RGBA")
+    image.paste(watermark, (0, 0), watermark)
+    return image
+
+@app.route('/AdesivoDigital', methods=['GET', 'POST'])
+def adesivodigital():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return 'No file part', 400
+        file = request.files['file']
+        if file.filename == '':
+            return 'No selected file', 400
+        image = Image.open(file)
+
+        # Crop the image to 1:1 ratio
+        image = ImageOps.fit(image, (min(image.size), min(image.size)), method=0, bleed=0.0, centering=(0.5, 0.5))
+
+        # Add watermark
+        watermark_path = 'static/watermark.png'
+        image = add_watermark(image, watermark_path)
+
+        # Save the image to a bytes buffer
+        img_io = io.BytesIO()
+        image.save(img_io, 'PNG')
+        img_io.seek(0)
+
+        return send_file(img_io, mimetype='image/png', as_attachment=True, download_name='watermarked_image.png')
+    return render_template('AdesivoDigital.html')
 
 @app.route('/ZAP')
 def ZAP():
