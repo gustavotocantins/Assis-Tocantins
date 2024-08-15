@@ -26,13 +26,14 @@ def whatsapp():
 def golsolidario():
     return render_template('GolSolidario.html')
 
-def add_watermark(image, watermark_path):
-    watermark = Image.open(watermark_path).convert("RGBA")
-    image.paste(watermark, (0, 0), watermark)
-    return image
+
 
 @app.route('/AdesivoDigital', methods=['GET', 'POST'])
 def adesivodigital():
+    def add_watermark(image, watermark_path):
+        watermark = Image.open(watermark_path).convert("RGBA")
+        image.paste(watermark, (0, 0), watermark)
+        return image
     if request.method == 'POST':
         if 'file' not in request.files:
             return 'No file part', 400
