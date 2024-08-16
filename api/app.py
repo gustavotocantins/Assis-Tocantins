@@ -60,7 +60,7 @@ def adesivodigital():
         image.save(img_io, 'PNG')
         img_io.seek(0)
 
-        return send_file(img_io, mimetype='image/png', as_attachment=True, download_name='watermarked_image.png')
+        return send_file(img_io, mimetype='image/png', as_attachment=True, download_name='AssisTocantins40400.png')
     return render_template('AdesivoDigital.html')
 
 @app.route('/ZAP')
