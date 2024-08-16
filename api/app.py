@@ -5,7 +5,7 @@ from glob import glob
 from os import chdir
 import os
 import json
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps, ImageEnhance
 import io
 
 app = Flask(__name__)
@@ -32,9 +32,29 @@ def golsolidario():
 def adesivodigital():
     def add_watermark(image, watermark_path):
         base_path = os.path.dirname(__file__)
-        watermark_full_path = os.path.join(base_path, 'static', 'watermark.png')
+        watermark_full_path = os.path.join(base_path, watermark_path)
         try:
+            # Open watermark
             watermark = Image.open(watermark_full_path).convert("RGBA")
+            
+            # Resize watermark to fit the image
+            watermark_width, watermark_height = watermark.size
+            image_width, image_height = image.size
+            
+            # Calculate the maximum size for the watermark
+            max_watermark_size = min(image_width, image_height) * 0.3  # Adjust 0.3 as needed
+
+            # Scale watermark to fit image
+            if watermark_width > max_watermark_size or watermark_height > max_watermark_size:
+                scale_factor = max_watermark_size / max(watermark_width, watermark_height)
+                new_size = (int(watermark_width * scale_factor), int(watermark_height * scale_factor))
+                watermark = watermark.resize(new_size, Image.ANTIALIAS)
+
+            # Create a new image for watermarking
+            watermark = watermark.convert("RGBA")
+            watermark = watermark.resize((image_width, image_height), Image.ANTIALIAS)
+            
+            # Apply watermark
             image.paste(watermark, (0, 0), watermark)
         except FileNotFoundError:
             raise Exception(f"Watermark file not found: {watermark_full_path}")
