@@ -8,15 +8,43 @@
   <link rel="icon" href="/static/images/icon-192x192.png">
   <link rel="apple-touch-icon" href="/static/images/icon-192x192.png">
   <title>Meu PWA Flask</title>
+  
 </head>
 <body>
   <h1>Bem-vindo ao Meu PWA com Flask!</h1>
+  <button id="install-button" style="display: none;">Adicionar à Tela Inicial</button>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/static/service-worker.js')
         .then(reg => console.log('Service Worker registrado:', reg))
         .catch(err => console.error('Erro ao registrar o Service Worker:', err));
-    }
+    };
+    let deferredPrompt;
+
+// Capturar o evento 'beforeinstallprompt'
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault(); // Prevenir o prompt automático
+  deferredPrompt = e; // Guardar o evento para uso posterior
+  // Exibir botão ou mensagem personalizada
+  const installButton = document.getElementById('install-button');
+  installButton.style.display = 'block';
+  
+  // Configurar o clique no botão
+  installButton.addEventListener('click', async () => {
+    installButton.style.display = 'none'; // Ocultar botão
+    deferredPrompt.prompt(); // Exibir o prompt de instalação
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`Resultado da instalação: ${outcome}`);
+    deferredPrompt = null; // Limpar evento armazenado
+  });
+});
+
+// Evento 'appinstalled' dispara quando o app é instalado
+window.addEventListener('appinstalled', () => {
+  console.log('PWA foi instalado com sucesso!');
+  document.getElementById('install-button').style.display = 'none';
+});
+
   </script>
 </body>
 </html>
